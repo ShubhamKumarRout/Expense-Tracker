@@ -8,7 +8,8 @@ import { startUserLogin } from '../../actions/userActions';
 
 const Login = (props) => {
 
-    const {handleRegisterForm}=props
+    console.log(props);
+    const {handleRegisterForm,handleAuth}=props
 
     const user=useSelector(state=>{
         return state.user
@@ -37,7 +38,7 @@ const Login = (props) => {
         initialValues:initialValues,
         validationSchema:validation,
         onSubmit:(values)=>{
-            dispatch(startUserLogin(values))
+            dispatch(startUserLogin(values,handleAuth,props))
             
         }
     })

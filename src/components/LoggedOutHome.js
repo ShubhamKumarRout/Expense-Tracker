@@ -1,9 +1,12 @@
 import React,{useState,useEffect} from 'react'
 import Register from './forms/Register'
 import Login from './forms/Login'
+import { withRouter } from 'react-router-dom'
 
-const LoggedOutHome = () => {
-    const [login,setLogin]=useState(false)
+const LoggedOutHome = (props) => {
+
+  const {handleAuth}=props
+  const [login,setLogin]=useState(false)
   const [register,setRegister]=useState(true)
 
   const handleRegisterForm=()=>{
@@ -22,12 +25,13 @@ const LoggedOutHome = () => {
         <button onClick={handleLogInForm}>LogIn</button>
       </div>
       {register ? 
-        <Register handleLogInForm={handleLogInForm}/>
+        
+        <Register {...props} handleLogInForm={handleLogInForm}/>
         :
-        <Login handleRegisterForm={handleRegisterForm}/>
+        <Login {...props} handleRegisterForm={handleRegisterForm} handleAuth={handleAuth}/>
       }
     </div>
   )
 }
 
-export default LoggedOutHome
+export default withRouter(LoggedOutHome)

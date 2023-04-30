@@ -1,5 +1,4 @@
 const initialState={
-    isRegistered:false,
     data:{},
     error:{}
 }
