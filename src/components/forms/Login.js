@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { TextField } from '@material-ui/core';
@@ -6,21 +6,20 @@ import './register.css'
 import { useSelector,useDispatch } from 'react-redux';
 import { startUserLogin } from '../../actions/userActions';
 
-const Login = (props) => {
 
-    console.log(props);
+const Login = (props) => {
     const {handleRegisterForm,handleAuth}=props
 
-    const user=useSelector(state=>{
-        return state.user
+    const userError=useSelector(state=>{
+        return state.user['error']
     })
+    const [error,setError]=useState(false)
+
     const dispatch=useDispatch()
 
     useEffect(()=>{
-        if(Object.keys(user.error).length!==0){
-            
-        }
-    },[user])
+        console.log(userError.length);
+    },[userError])
     
     const initialValues={
        
@@ -48,7 +47,9 @@ const Login = (props) => {
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
             <div>
+                {
 
+                }
                 <TextField
                     id="outlined-basic"
                     label={touched.email && errors.email?touched.email && errors.email:"Email"}

@@ -1,22 +1,20 @@
-import React,{useState,useEffect} from 'react'
+import React from 'react'
 import Register from './forms/Register'
-import Login from './forms/Login'
-import { withRouter } from 'react-router-dom'
+
+import { Link,withRouter } from 'react-router-dom'
 
 const LoggedOutHome = (props) => {
 
   const {handleAuth}=props
-  const [login,setLogin]=useState(false)
-  const [register,setRegister]=useState(true)
 
   const handleRegisterForm=()=>{
-    setRegister(true)
-    setLogin(false)
+   
+    props.history.push('/LoggedOutHome/register')
   }
 
   const handleLogInForm=()=>{
-    setLogin(true)
-    setRegister(false)
+    
+    props.history.push('/LoggedOutHome/login')
   }
   return (
     <div>
@@ -24,12 +22,7 @@ const LoggedOutHome = (props) => {
         <button onClick={handleRegisterForm}>Register</button>
         <button onClick={handleLogInForm}>LogIn</button>
       </div>
-      {register ? 
-        
-        <Register {...props} handleLogInForm={handleLogInForm}/>
-        :
-        <Login {...props} handleRegisterForm={handleRegisterForm} handleAuth={handleAuth}/>
-      }
+      
     </div>
   )
 }
