@@ -7,11 +7,11 @@ import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { startGetUser } from './actions/userActions';
-import { ProSidebarProvider } from 'react-pro-sidebar';
+
 
 const store=configureStore()
 
-// store.dispatch(startGetUser())
+store.dispatch(startGetUser())
 
 console.log(store.getState());
 

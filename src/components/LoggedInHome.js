@@ -1,25 +1,36 @@
 import React from 'react'
+import '../App.css'
 import { withRouter } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { startGetUser } from '../actions/userActions'
 import swal from 'sweetalert'
+
 
 const LoggedInHome = (props) => {
   const {handleAuth}=props
-
-  const dispatch=useDispatch()
 
   const handleLogOut=()=>{
     localStorage.removeItem('token')
     swal("Logged Out Succesfully");
     handleAuth()
-    // props.history.push('/Home/LoggedOut/register')
+    props.history.push('/LoggedOutHome/register')
   }
 
+  const handleHomeClick=()=>{
+    props.history.push('/LoggedInHome/Home')
+  }
+  const handleProfileClick=()=>{
+    props.history.push('/LoggedInHome/Profile')
+  }
   return (
-    <div>LoggedInHome
-      <button onClick={handleLogOut}>log out</button>
-    </div>
+    <>
+      <div className='navbar'>
+       
+        <ul className="list">
+          <li className="items" onClick={handleHomeClick}>Home</li>
+          <li className="items" onClick={handleProfileClick}>Profile</li>
+          <li className="items" onClick={handleLogOut}>Log Out</li>
+        </ul>
+      </div>
+    </>
     
   )
 }

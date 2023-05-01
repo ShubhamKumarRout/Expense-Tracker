@@ -1,10 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import './App.css'
-import LoggedInHome from './components/LoggedInHome'
-import LoggedOutHome from './components/LoggedOutHome'
-import { useSelector,useDispatch } from 'react-redux'
-import { startGetUser } from './actions/userActions'
-import {Link,Route} from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Navigation from './components/Navigation'
 
 const App=(props)=>{
@@ -12,14 +8,15 @@ const App=(props)=>{
 
   const [isLoggedIn,setIsLoggedIn]=useState(false)
 
+  const user=useSelector((state)=>{
+    return state.user.data
+  })
+
   const handleAuth=()=>{
-    console.log('handleAuth');
     setIsLoggedIn(!isLoggedIn)
   }
 
   useEffect(()=>{
-
-    // console.log(localStorage.getItem('token'));
     if(localStorage.getItem('token')){
       handleAuth()
     }
@@ -28,7 +25,7 @@ const App=(props)=>{
  
 
   return(
-    <div>
+    <div className='container'>
       <h1>Expense Tracker</h1>
       <Navigation isLoggedIn={isLoggedIn} handleAuth={handleAuth}/>  
     </div>

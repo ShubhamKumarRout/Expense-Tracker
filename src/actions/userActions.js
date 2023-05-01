@@ -42,9 +42,8 @@ export const startUserLogin = (data,handleAuth,props) => {
         axios.post('http://127.0.0.1:3080/user/login', data)
             .then(res => {
                 const result = res.data
-
                 if (result.hasOwnProperty('errors')) {
-                    alert(result.message)
+                    // alert(result.errors)
                     dispatch(setErrors(result.errors))
                 }
                 else {
@@ -53,7 +52,7 @@ export const startUserLogin = (data,handleAuth,props) => {
                     dispatch(startGetUser())
                     swal("Log In Successfull");
                     handleAuth()
-                    props.history.push('/LoggedInHome')
+                    props.history.push('/LoggedInHome/Home')
                 }
             })
     }
