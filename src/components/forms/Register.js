@@ -28,7 +28,7 @@ const Register = (props) => {
         initialValues:initialValues,
         validationSchema:validation,
         onSubmit:(values)=>{
-            dispatch(startRegisterUser(values))
+            dispatch(startRegisterUser(values,props))
             
         }
     })

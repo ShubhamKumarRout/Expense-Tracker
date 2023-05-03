@@ -1,7 +1,7 @@
 import axios from "axios"
 import swal from 'sweetalert';
 
-export const startRegisterUser = (data) => {
+export const startRegisterUser = (data,props) => {
     return (dispatch) => {
         axios.post('http://127.0.0.1:3080/user/register', data)
             .then(res => {
@@ -13,6 +13,7 @@ export const startRegisterUser = (data) => {
                     dispatch(registerUser(result))
                     dispatch(setErrors({}))
                     swal("You have successfully registered");
+                    props.history.push('/LoggedOutHome/login')
                 }
 
 
@@ -42,8 +43,9 @@ export const startUserLogin = (data,handleAuth,props) => {
         axios.post('http://127.0.0.1:3080/user/login', data)
             .then(res => {
                 const result = res.data
+
                 if (result.hasOwnProperty('errors')) {
-                    // alert(result.errors)
+                    alert(result.message)
                     dispatch(setErrors(result.errors))
                 }
                 else {

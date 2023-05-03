@@ -1,9 +1,12 @@
 .switch-content{
   display: flex;
 }
-/* .container{
-  background-color: khaki;
-} */
+.container{
+  /* background-color: khaki; */
+  height: 100%;
+  width: 100%;
+ 
+}
 .navbar{
   position: fixed;
     top: 0;
