@@ -7,6 +7,7 @@ import Register from './forms/Register';
 import Login from './forms/Login';
 import Home from './Home';
 import Profile from './Profile'
+import Settings from './Settings';
 
 const Navigation = (props) => {
 
@@ -65,6 +66,14 @@ const Navigation = (props) => {
                         <Profile/>
                     )
                 }}
+                
+                />
+                <Route path='/LoggedInHome/Settings' render={(props) => {
+                    return (
+                        <Settings/>
+                    )
+                }}
+                
                 />
             </div>
 
