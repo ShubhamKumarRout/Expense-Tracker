@@ -1,7 +1,21 @@
 import axios from "axios"
 import swal from 'sweetalert';
 
+const setBudget=(budget)=>{
+    return{
+        type:"SET_BUDGET",
+        payload:budget
+    }
+}
+const setErrors=(error)=>{
+    return {
+        type:'SET_BUDGET_ERROR',
+        payload:error
+    }
+}
+
 export const getBudgetDetails=()=>{
+    
     return (dispatch)=>{
         axios.get(`http://127.0.0.1:3080/user/budget`,{
             headers:{
@@ -10,7 +24,6 @@ export const getBudgetDetails=()=>{
         })   
             .then(response=>{
                 const result=response.data
-                console.log(result);
                 if (result.hasOwnProperty('errors')) {
                     alert(result.message)
                     dispatch(setErrors(result.errors))
@@ -30,18 +43,7 @@ export const getBudgetDetails=()=>{
             
 }
 
-const setBudget=(budget)=>{
-    return{
-        type:"SET_BUDGET",
-        payload:budget
-    }
-}
-const setErrors=(error)=>{
-    return {
-        type:'SET_BUDGET_ERROR',
-        payload:error
-    }
-}
+
 
 const editBudget=(data)=>{
     return {
@@ -50,10 +52,11 @@ const editBudget=(data)=>{
     }
 }
 export const updateBudget=(id,data)=>{
+    const token=localStorage.getItem('token')
     return (dispatch)=>{
         axios.put(`http://127.0.0.1:3080/user/budget/${id}`,data,{
             headers:{
-                'x-auth':localStorage.getItem('token')
+                'x-auth':token
             }
         })
         .then(response=>{
@@ -65,7 +68,7 @@ export const updateBudget=(id,data)=>{
             else{
                 dispatch(editBudget(result))
                 dispatch(setErrors({}))
-                swal('Budget Updated')
+                swal('Budget Updated','',"success")
             }
         })
     }

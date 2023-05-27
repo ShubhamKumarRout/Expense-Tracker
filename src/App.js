@@ -26,7 +26,9 @@ const App=(props)=>{
 
   return(
     <div className='container'>
+      <div>
       <h1>Expense Tracker</h1>
+      </div>
       <Navigation isLoggedIn={isLoggedIn} handleAuth={handleAuth}/>  
     </div>
   )

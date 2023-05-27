@@ -1,4 +1,4 @@
-div{
+.register{
     display: grid;
     place-items: center;
     gap: 8px;

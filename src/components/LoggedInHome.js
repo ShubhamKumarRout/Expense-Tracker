@@ -5,37 +5,42 @@ import swal from 'sweetalert'
 
 
 const LoggedInHome = (props) => {
-  const {handleAuth}=props
+  const { handleAuth } = props
 
-  const handleLogOut=()=>{
+  const handleLogOut = () => {
     localStorage.removeItem('token')
-    swal("Logged Out Succesfully");
+    swal("Logged Out Succesfully", '', 'success');
     handleAuth()
     props.history.push('/LoggedOutHome/register')
   }
 
-  const handleHomeClick=()=>{
+  const handleHomeClick = () => {
     props.history.push('/LoggedInHome/Home')
   }
-  const handleProfileClick=()=>{
+  const handleProfileClick = () => {
     props.history.push('/LoggedInHome/Profile')
   }
-  const handleSettingsClick=()=>{
+  const handleSettingsClick = () => {
     props.history.push('/LoggedInHome/Settings')
   }
   return (
     <>
       <div className='navbar'>
-       
-        <ul className="list">
-          <li className="items" onClick={handleHomeClick}>Home</li>
-          <li className="items" onClick={handleSettingsClick}>Settings</li>
-          <li className="items" onClick={handleProfileClick}>Profile</li>
-          <li className="items" onClick={handleLogOut}>Log Out</li>
-        </ul>
+        <div className='title'>
+          Expense Tracker
+        </div>
+        <div>
+          <ul className="list">
+            <li className="items" onClick={handleHomeClick}>Home</li>
+            <li className="items" onClick={handleSettingsClick}>Settings</li>
+            <li className="items" onClick={handleProfileClick}>Profile</li>
+            <li className="items" onClick={handleLogOut}>Log Out</li>
+          </ul>
+        </div>
+
       </div>
     </>
-    
+
   )
 }
 

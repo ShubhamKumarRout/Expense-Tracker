@@ -43,13 +43,11 @@ const Login = (props) => {
     })
 
     return (
-        <>
+        <div className='register'>
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
-            <div>
-                {
-
-                }
+            <div className='register'>
+                
                 <TextField
                     id="outlined-basic"
                     label={touched.email && errors.email?touched.email && errors.email:"Email"}
@@ -79,7 +77,7 @@ const Login = (props) => {
                 </div>
             </form>
 
-        </>
+        </div>
     )
 }
 

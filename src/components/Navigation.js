@@ -34,7 +34,7 @@ const Navigation = (props) => {
                     <LoggedOutHome handleAuth={handleAuth} />
             }
 
-            <div>
+            
                 <Route path='/LoggedInHome' render={(props) => {
                     return (
                         <LoggedInHome {...props} handleAuth={handleAuth} />
@@ -75,7 +75,7 @@ const Navigation = (props) => {
                 }}
                 
                 />
-            </div>
+            
 
         </>
     )
