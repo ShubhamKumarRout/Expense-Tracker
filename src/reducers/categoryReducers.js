@@ -1,12 +1,16 @@
 const initialState = {
     data: [],
-    error: {}
+    error: {},
+    isLoading:true
 }
 
 const categoryReducers = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_CATEGORY_ERROR': {
             return { ...state, error: action.payload }
+        }
+        case 'SET_CATEGORY_IS_LOADING':{
+            return { ...state, isLoading: false }
         }
         case 'SET_CATEGORY': {
             return { ...state, data: action.payload }

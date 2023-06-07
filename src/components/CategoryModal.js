@@ -67,6 +67,7 @@ const CategoryModal = (props) => {
     const [input,setInput]=React.useState('')
     const handleOpen = () => setOpen(true);
     const handleClose = () => {setOpen(false)
+        
         handlModaleClose()
     }
 

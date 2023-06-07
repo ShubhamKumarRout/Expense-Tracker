@@ -9,7 +9,12 @@ const setErrors=(error)=>{
         payload:error
     }
 }
-
+const setIsLoading=()=>{
+    return ({
+        type:'SET_CATEGORY_IS_LOADING',
+        
+    })
+}
 const getCategory=(data)=>{
     return ({
         type:'SET_CATEGORY',
@@ -17,16 +22,17 @@ const getCategory=(data)=>{
     })
 }
 export const getCategoryDetails=()=>{
-    const token=localStorage.getItem('token')
+    
     return (dispatch)=>{
         axios.get('http://127.0.0.1:3080/user/category',{
             headers:{
-                'x-auth':token
+                'x-auth':localStorage.getItem('token')
             }
         })
         .then(response=>{
             const result=response.data
             dispatch(getCategory(result))
+            dispatch(setIsLoading())
         })
         .catch(err=>{
             console.log(err);
@@ -41,11 +47,11 @@ const createCategory=(category)=>{
     })
 }
 export const createCategoryDetails=(form)=>{
-    const token=localStorage.getItem('token')
+    
     return (dispatch)=>{
         axios.post('http://127.0.0.1:3080/user/category',form,{
             headers:{
-                'x-auth':token
+                'x-auth':localStorage.getItem('token')
             }
         })
         .then(response=>{
@@ -57,6 +63,7 @@ export const createCategoryDetails=(form)=>{
             }
             else{
                 dispatch(createCategory(result))
+                dispatch(setErrors({}))
             }
             // 
         })
@@ -73,12 +80,12 @@ const deleteCategory=(result)=>{
         payload:result
     })
 }
-export const deleteCategoryDetails=(id)=>{
-    const token=localStorage.getItem('token')
+export const deleteCategoryDetails=(id,deleteExpnses)=>{
+    
     return (dispatch)=>{
         axios.delete(`http://127.0.0.1:3080/user/category/${id}`,{
             headers:{
-                'x-auth':token
+                'x-auth':localStorage.getItem('token')
             }
         })
         .then(response=>{
@@ -89,6 +96,7 @@ export const deleteCategoryDetails=(id)=>{
             }
             else{
                 dispatch(deleteCategory(result))
+                deleteExpnses()
                 swal('Deleted Successfully','','success')
             }
             
@@ -107,12 +115,12 @@ const editCategory=(result)=>{
     })
 }
 export const editCategoryDetails=(id,body,handlModaleClose)=>{
-    console.log(id,body,handlModaleClose);
-    const token=localStorage.getItem('token')
+    
+    
     return (dispatch)=>{
         axios.put(`http://127.0.0.1:3080/user/category/${id}`,body,{
             headers:{
-                'x-auth':token
+                'x-auth':localStorage.getItem('token')
             }
         })
         .then(response=>{

@@ -1,13 +1,23 @@
 import React,{useState,useEffect} from 'react'
 import './App.css'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Navigation from './components/Navigation'
+import { getCategoryDetails } from './actions/categoryActions'
+import { getBudgetDetails } from './actions/budgetActions'
+import { getExpenseDetails } from './actions/expenseActions'
 
 const App=(props)=>{
 
 
   const [isLoggedIn,setIsLoggedIn]=useState(false)
 
+  const dispatch=useDispatch()
+  useEffect(()=>{
+      dispatch(getCategoryDetails())
+      dispatch(getBudgetDetails())
+      dispatch(getExpenseDetails())
+  },[])
+  
   const user=useSelector((state)=>{
     return state.user.data
   })

@@ -8,6 +8,7 @@ import Login from './forms/Login';
 import Home from './Home';
 import Profile from './Profile'
 import Settings from './Settings';
+import ArchivedExpenses from './ArchivedExpenses';
 
 const Navigation = (props) => {
 
@@ -71,6 +72,13 @@ const Navigation = (props) => {
                 <Route path='/LoggedInHome/Settings' render={(props) => {
                     return (
                         <Settings/>
+                    )
+                }}
+                
+                />
+                <Route path='/LoggedInHome/Home/Archived' render={(props) => {
+                    return (
+                        <ArchivedExpenses {...props}/>
                     )
                 }}
                 

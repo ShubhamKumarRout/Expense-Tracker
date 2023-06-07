@@ -18,7 +18,7 @@ const budgetReducer = (state = initialState, action) => {
             return { ...state, data: action.payload }
         }
         case 'SET_BUDGET_IS_LOADING':{
-            return { ...state, isLoading: action.payload }
+            return { ...state, isLoading: false }
         }
         default: {
             return state;

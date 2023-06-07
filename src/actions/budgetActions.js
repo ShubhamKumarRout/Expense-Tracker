@@ -13,7 +13,12 @@ const setErrors=(error)=>{
         payload:error
     }
 }
-
+const setIsLoading=(bool)=>{
+    return {
+        type:'SET_BUDGET_IS_LOADING',
+        payload:bool
+    }
+}
 export const getBudgetDetails=()=>{
     
     return (dispatch)=>{
@@ -31,6 +36,7 @@ export const getBudgetDetails=()=>{
                 else{
                     
                     dispatch(setBudget(result))
+                    dispatch(setIsLoading(false))
                     dispatch(setErrors({}))
                     
                 }
@@ -52,6 +58,7 @@ const editBudget=(data)=>{
     }
 }
 export const updateBudget=(id,data)=>{
+    console.log('budgetaction',id);
     const token=localStorage.getItem('token')
     return (dispatch)=>{
         axios.put(`http://127.0.0.1:3080/user/budget/${id}`,data,{
@@ -61,13 +68,15 @@ export const updateBudget=(id,data)=>{
         })
         .then(response=>{
             const result=response.data
+            console.log(result);
             if (result.hasOwnProperty('errors')) {
-                console.log(result.errors)
-                // dispatch(setErrors(result.errors.message))
+                swal(result.errors)
+                dispatch(setErrors(result.errors.message))
             }
             else{
                 dispatch(editBudget(result))
                 dispatch(setErrors({}))
+                dispatch(setIsLoading(false))
                 swal('Budget Updated','',"success")
             }
         })

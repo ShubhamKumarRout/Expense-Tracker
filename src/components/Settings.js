@@ -9,6 +9,7 @@ import { createCategoryDetails, deleteCategoryDetails, editCategoryDetails, getC
 import Grid from '@mui/material/Grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { getExpenseDetails } from '../actions/expenseActions'
 
 const Settings = () => {
 
@@ -19,6 +20,10 @@ const Settings = () => {
 
     const [categoryDetails,setCategoryDetails]=useState('')
 
+    const isLoading=useSelector(state=>{
+        return state.budget.isLoading
+    })
+   
     const budget = useSelector(state => {
         return state.budget.data
     })
@@ -28,30 +33,29 @@ const Settings = () => {
 
     const dispatch = useDispatch()
 
-    useEffect(()=>{
-        setBudgetDetails(budget.amount)
-    },[budget])
     useEffect(() => {
         dispatch(getBudgetDetails())
-        setBudgetDetails(budget.amount)
     }, [])
     useEffect(() => {
         dispatch(getCategoryDetails())
     }, [])
+    useEffect(()=>{
+        setBudgetDetails(budget)
+    },[budget])
     
-
-
+    
+    
     useEffect(()=>{
         setCategoryDetails('')
     },[category])
 
     const handleBudgetChange = (e) => {
-        console.log(e.target.value);
         setBudgetDetails(e.target.value)
     }
     const handleBudgetUpdate = (e) => {
-        if (budget.amount === Number(budgetDetails)) {
-            swal('previos budget value is same as current one. Please update', '', 'error')
+        console.log(budget);
+        if (budget.amount === Number(budgetDetails.amount)) {
+            swal('previous budget value is same as current one. Please update', '', 'error')
         }
         else {
             const form = {
@@ -71,14 +75,18 @@ const Settings = () => {
         }
         dispatch(createCategoryDetails(form))
     }
+    const deleteExpnses=()=>{
+        dispatch(getExpenseDetails())
+    }
     const handleCategoryDelete=(id)=>{
         const confirm=window.confirm('are you sure?')
         if( confirm){
-            dispatch(deleteCategoryDetails(id))
+            dispatch(deleteCategoryDetails(id,deleteExpnses))
         }
         
         
     }
+    
     const handleOpenModal=(ele)=>{
         
         setOpen(!open)
@@ -86,13 +94,12 @@ const Settings = () => {
 
     }
     const handlModaleClose=()=>{
+        setEditData({})
         setOpen(!open)
     }
     const handleCategoryEdit=(formData)=>{
         dispatch(editCategoryDetails(formData._id,{categoryName:formData.categoryName},handlModaleClose))       
     }
-
-    console.log(budget);
   
    
     return (
@@ -100,18 +107,18 @@ const Settings = () => {
             <h2>Settings Component</h2>
             
             <div className='budget-setting'>
-                <h3>Total Budget-{budget.amount}</h3>
+                <h3>Total Budget-{  isLoading?  '...' : budget.amount}</h3>
 
                 <TextField
                     id="outlined-basic"
                     label={'Budget'}
                     name='budget'
                     variant="outlined"
-                    value={budgetDetails}
+                    value={budgetDetails.amount}
                     onChange={handleBudgetChange}
                 />
                 <button onClick={handleBudgetUpdate}
-                    // disabled={budget.amount === Number(budgetDetails.amount)}
+                    // disabled={budget.totalBudget.amount === Number(budgetDetails.amount)}
                     className='btn'>
                     update
                 </button>

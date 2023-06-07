@@ -9,6 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { startGetUser } from './actions/userActions';
 import { getCategoryDetails } from './actions/categoryActions';
 import { getBudgetDetails } from './actions/budgetActions';
+import { getExpenseDetails } from './actions/expenseActions';
 
 
 const store=configureStore()
@@ -16,6 +17,8 @@ const store=configureStore()
 store.dispatch(startGetUser())
 // store.dispatch(getCategoryDetails())
 // store.dispatch(getBudgetDetails())
+// store.dispatch(getExpenseDetails())
+
 
 console.log(store.getState());
 
