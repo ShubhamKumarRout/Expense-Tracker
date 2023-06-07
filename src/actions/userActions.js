@@ -1,18 +1,21 @@
 import axios from "axios"
 import swal from 'sweetalert';
 
-export const startRegisterUser = (data) => {
+export const startRegisterUser = (data,props) => {
     return (dispatch) => {
         axios.post('http://127.0.0.1:3080/user/register', data)
             .then(res => {
                 const result = res.data
+                console.log(result);
                 if (result.hasOwnProperty('errors')) {
                     dispatch(setErrors(result.errors))
+                    swal(result.errors,'','error')
                 }
                 else {
                     dispatch(registerUser(result))
                     dispatch(setErrors({}))
-                    swal("You have successfully registered");
+                    swal("You have successfully registered",'','success');
+                    props.history.push('/LoggedOutHome/login')
                 }
 
 
@@ -42,15 +45,17 @@ export const startUserLogin = (data,handleAuth,props) => {
         axios.post('http://127.0.0.1:3080/user/login', data)
             .then(res => {
                 const result = res.data
+                
                 if (result.hasOwnProperty('errors')) {
-                    // alert(result.errors)
+                    
                     dispatch(setErrors(result.errors))
+                    swal(result.errors,'','error')
                 }
                 else {
                     localStorage.setItem('token', result.token)
                     dispatch(setErrors({}))
                     dispatch(startGetUser())
-                    swal("Log In Successfull");
+                    swal("Log In Successfull",'','success');
                     handleAuth()
                     props.history.push('/LoggedInHome/Home')
                 }

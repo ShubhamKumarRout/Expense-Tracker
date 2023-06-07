@@ -7,6 +7,8 @@ import Register from './forms/Register';
 import Login from './forms/Login';
 import Home from './Home';
 import Profile from './Profile'
+import Settings from './Settings';
+import ArchivedExpenses from './ArchivedExpenses';
 
 const Navigation = (props) => {
 
@@ -33,7 +35,7 @@ const Navigation = (props) => {
                     <LoggedOutHome handleAuth={handleAuth} />
             }
 
-            <div>
+            
                 <Route path='/LoggedInHome' render={(props) => {
                     return (
                         <LoggedInHome {...props} handleAuth={handleAuth} />
@@ -65,8 +67,23 @@ const Navigation = (props) => {
                         <Profile/>
                     )
                 }}
+                
                 />
-            </div>
+                <Route path='/LoggedInHome/Settings' render={(props) => {
+                    return (
+                        <Settings/>
+                    )
+                }}
+                
+                />
+                <Route path='/LoggedInHome/Home/Archived' render={(props) => {
+                    return (
+                        <ArchivedExpenses {...props}/>
+                    )
+                }}
+                
+                />
+            
 
         </>
     )

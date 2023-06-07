@@ -28,16 +28,16 @@ const Register = (props) => {
         initialValues:initialValues,
         validationSchema:validation,
         onSubmit:(values)=>{
-            dispatch(startRegisterUser(values))
+            dispatch(startRegisterUser(values,props))
             
         }
     })
 
     return (
-        <>
+        <div className='register'>
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
-            <div>
+            <div className='register' >
 
             
                 <TextField
@@ -79,7 +79,7 @@ const Register = (props) => {
                 </div>
             </form>
 
-        </>
+        </div>
     )
 }
 
